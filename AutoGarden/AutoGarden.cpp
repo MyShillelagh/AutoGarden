@@ -1,34 +1,36 @@
 #include <Arduino.h>
 
-int relay_pins[] = {5, 6, 7};
+int relayPins[] = {5, 6, 7};
 int pump = 8;
-int sensor_pins[] = {A0, A1, A2};
+int sensorPins[] = {A0, A1, A2};
+int pincount = 3;
 
 void setup()
 {
-  pinMode(relay_pins[0,1,2], OUTPUT);
+  for (int pinInit = 0; pinInit < pincount; pinInit ++)
+  {
+	pinMode(relayPins[pinInit], OUTPUT);
+  }
   pinMode(pump, OUTPUT);
 
   Serial.begin(9600);
-
-  pinMode(sensor_pins[0,1,2], INPUT);
 }
 
 void loop()
 {
-  for (int i = 0; i <= 2; i + 1)			//Loop runs through the array of sensors set up previously
+  for (int i = 0; i < pincount; i ++)			//Loop runs through the array of sensors set up previously
   {
-    if (analogRead(sensor_pins[i]) >= 500)
+    if (analogRead(sensorPins[i]) >= 400)
     {
-      digitalWrite(relay_pins[i], HIGH);
+      digitalWrite(relayPins[i], HIGH);
       digitalWrite(pump, HIGH);
       delay(2000);
-      digitalWrite(relay_pins[i], LOW);
+      digitalWrite(relayPins[i], LOW);
       digitalWrite(pump, LOW);
     }
     else
     {
-    	digitalWrite(relay_pins[i], LOW);
+    	digitalWrite(relayPins[i], LOW);
     	digitalWrite(pump, LOW);
     }
   }
