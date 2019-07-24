@@ -20,20 +20,21 @@ void loop()
 {
   for (int i = 0; i < pincount; i ++)			//Loop runs through the array of sensors set up previously
   {
-    if (analogRead(sensorPins[i]) >= 400)
+    if (analogRead(sensorPins[i]) >= 500)
     {
       digitalWrite(relayPins[i], HIGH);
       digitalWrite(pump, HIGH);
       delay(2000);
       digitalWrite(relayPins[i], LOW);
       digitalWrite(pump, LOW);
+      delay(5000);
     }
     else
     {
     	digitalWrite(relayPins[i], LOW);
     	digitalWrite(pump, LOW);
+    	delay(5000);
     }
   }
   //delay(6*60*60*1000ul); 					DON'T FORGET TO PUT THIS BACK TO NORMAL IN THE FINAL COPY
-  delay(1000);
 }
