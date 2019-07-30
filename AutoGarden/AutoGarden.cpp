@@ -24,13 +24,15 @@ void loop() {
 		Serial.println(analogRead(sensorPins[i]));
 		if (analogRead(sensorPins[i]) >= 400)				//Checks moisture of soil (higher = drier), range of 285-581
 		{
-			digitalWrite(relayPins[i], LOW);
-			digitalWrite(pump, LOW);
+			digitalWrite(relayPins[i], LOW);				//NOTE: the LOW and HIGH outputs may have to be switched depending
+			digitalWrite(pump, LOW);						//on how you wire the circuit together.
 			delay(2000);
 			digitalWrite(relayPins[i], HIGH);
 			digitalWrite(pump, HIGH);
 			delay(5000);
-		} else {
+		}
+		else
+		{
 			digitalWrite(relayPins[i], HIGH);
 			digitalWrite(pump, HIGH);
 			delay(5000);
